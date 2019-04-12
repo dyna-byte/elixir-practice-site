@@ -1,0 +1,4 @@
+<h1>Showing user #<%= @user.id %>
+<strong><%= first_name(@user) %></strong>
+</h1>
+
