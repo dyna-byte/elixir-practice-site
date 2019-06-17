@@ -34,14 +34,4 @@ defmodule Rumbl.UserController do
     end
   end
 
-  defp authenticate(conn, _opts) do
-    if conn.assigns.current_user do
-      conn
-    else
-      conn
-      |> put_flash(:error, "You must be logged in")
-      |> redirect(to: page_path(conn, :index))
-      |> halt()
-    end
-  end
 end
