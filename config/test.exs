@@ -19,4 +19,3 @@ config :rumbl, Rumbl.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :bcrypt_elixir, log_rounds: 4
-config :pbkdf2_elixir, rounds: 1
