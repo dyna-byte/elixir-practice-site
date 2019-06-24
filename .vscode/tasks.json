@@ -4,6 +4,15 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Run server",
+      "type": "shell",
+      "command": "iex -S mix phoenix.server",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
       "label": "Test File",
       "type": "shell",
       "command": "mix test ${file}",
