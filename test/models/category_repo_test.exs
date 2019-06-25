@@ -1,8 +1,6 @@
 defmodule Rumbl.CategoryRepoTest do
   use Rumbl.ModelCase
-
   alias Rumbl.Category
-
 
   test "alphabnetical orders by name" do
     ~w(c b a)
