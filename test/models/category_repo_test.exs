@@ -1,4 +1,4 @@
-defmodule Rumbl.UserRepoTest do
+defmodule Rumbl.CategoryRepoTest do
   use Rumbl.ModelCase
 
   alias Rumbl.Category
