@@ -22,11 +22,46 @@ const Video = {
     const postButton = document.getElementById("msg-submit");
     const videoChannel = socket.channel(`videos:${videoId}`);
 
+    postButton.addEventListener("click", e => {
+      const payload = {
+        body: msgInput.value,
+        at: Player.getCurrentTime()
+      };
+
+      videoChannel.push("new_annotation", payload)
+      .receive("error", e => console.error(e));
+      
+      msgInput.value = "";
+    });
+
+    videoChannel.on("new_annotation", (resp) => {
+      this.renderAnnotation(msgContainer, resp);
+    });
+
     videoChannel.join()
-      .receive("ok", resp => {
-        console.log("joined the channel", resp);
+      .receive("ok", ({annotations}) => {
+        annotations && annotations.forEach(ann => this.renderAnnotation(msgContainer, ann))
+        console.log("joined the channel");
       }).receive("error", reason => console.error("failed to join channel", reason))
+  },
+
+  renderAnnotation(msgcontainer, {user, body, at}) {
+    const template = document.createElement("div");
+
+    template.innerHTML = `
+    <a href="#" data-seek="${escape(at)}">
+      <strong>${escape(user.username)}</strong>: ${escape(body)}
+    </a>`;
+
+    msgcontainer.appendChild(template);
+    msgcontainer.scrollTop = msgcontainer.scrollHeight;
   }
+}
+
+function escape(str) {
+  const div = document.createElement("div");
+  div.appendChild(document.createTextNode(str))
+  return div.innerHTML;
 }
 
 export default Video
