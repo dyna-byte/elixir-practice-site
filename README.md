@@ -1,4 +1,3 @@
 # Rumbrella
 
-**TODO: Add description**
-
+This is umbrella root, check out apps/rumbl
