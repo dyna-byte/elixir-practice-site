@@ -23,7 +23,6 @@ defmodule Rumbl.InfoSys.Wolfram do
 
   defp send_results(answer, query_ref, owner) do
     results = [%Result{backend: "wolfram", score: 95, text: to_string(answer)}]
-    IO.puts(inspect(results))
     send(owner, {:results, query_ref, results})
   end
 
@@ -36,7 +35,7 @@ defmodule Rumbl.InfoSys.Wolfram do
   end
 
   defp extract_answer(body) do
-    answer = body |> xpath(~x"/queryresult/pod[contains(@title, 'Result') or contains(@title, 'Definitions')]
+    answer = body |> xpath(~x"/queryresult/pod[contains(@title, 'Result') or contains(@title, 'Definitions') or contains(@title, 'Response')]
       /subpod/plaintext/text()")
 
     if !answer do
