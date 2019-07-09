@@ -2,6 +2,7 @@ defmodule Rumbl.Counter do
   use GenServer
 
   def inc(pid), do: GenServer.cast(pid, :inc)
+  @spec dec(atom | pid | {atom, any} | {:via, atom, any}) :: :ok
   def dec(pid), do: GenServer.cast(pid, :dec)
 
   def val(pid) do
