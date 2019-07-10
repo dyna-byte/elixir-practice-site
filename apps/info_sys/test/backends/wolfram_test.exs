@@ -11,4 +11,11 @@ defmodule InfoSys.Backends.WolframTest do
     assert_receive {:DOWN, ^mon, :process, ^pid, :normal}
   end
 
+  test "no query results reports and empty list" do
+    ref = make_ref()
+    {:ok, _ } = Wolfram.start_link("none", ref, self(), 1)
+
+    assert_receive {:results, ^ref, []}
+  end
+
 end
